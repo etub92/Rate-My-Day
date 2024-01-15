@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Daily Mood Calculator</title>
+    <style>
+        #questionnaire {
+            text-align: center;
+        }
+
+        button {
+            background-color: orange;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="questionnaire">
+        <!-- Each "question" div contains a question and the corresponding rating radio buttons -->
+        <!-- Question 1 -->
+        <div class="question">
+            <p>Clarity: I knew my "why" and lived intentionally today.</p>
+            <div>
+                <!-- Radio buttons for rating -->
+                <input type="radio" id="clarity1" name="question1" value="1">
+                <label for="clarity1">1</label>
+                <input type="radio" id="clarity2" name="question1" value="2">
+                <label for="clarity2">2</label>
+                <input type="radio" id="clarity3" name="question1" value="3">
+                <label for="clarity3">3</label>
+                <input type="radio" id="clarity4" name="question1" value="4">
+                <label for="clarity4">4</label>
+                <input type="radio" id="clarity5" name="question1" value="5">
+                <label for="clarity5">5</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>Energy: I managed my mental and physical energy well.</p>
+            <div>
+                <!-- Radio buttons for rating -->
+                <!-- Repeat radio button structure as above, make sure to change the 'name' for each question -->
+            </div>
+        </div>
+
+        <!-- Add the rest of the questions in a similar pattern -->
+        <!-- ...
+        <div class="question">
+            <p>Question Text</p>
+            <div>
+                Radio buttons for rating
+            </div>
+        </div>
+        ... -->
+    </div>
+
+    <button onclick="submitRatings()">Submit My Ratings</button>
+    
+    <script>
+        function submitRatings() {
+            for (let i = 1; i <= 10; i++) {
+                var rating = getRatingForQuestion(i); 
+                localStorage.setItem('ratingQuestion' + i, rating);
+            }
+            alert("Thank you for submitting your ratings!");
+        }
+
+        function getRatingForQuestion(questionNumber) {
+            return document.querySelector(`input[name="question${questionNumber}"]:checked`).value;
+        }
+    </script>
+
+</body>
+</html>
