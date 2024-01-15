@@ -1,33 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 <head>
-    <title>My Daily Mood Calculator</title>
+    <meta charset="UTF-8">
+    <title>Calculatorul Stării de Spirit Zilnice</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
         #questionnaire {
+            max-width: 600px;
+            margin: 40px auto;
             text-align: center;
         }
 
+        .question {
+            margin-bottom: 30px;
+        }
+
         button {
-            background-color: orange;
+            background-color: gold;
             border: none;
-            color: white;
-            padding: 10px;
+            color: black;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
+            font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 8px;
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: gold;
+        }
+
+        input[type="radio"] {
+            accent-color: gold;
         }
     </style>
 </head>
 <body>
 
     <div id="questionnaire">
-        <!-- Each "question" div contains a question and the corresponding rating radio buttons -->
         <!-- Question 1 -->
         <div class="question">
-            <p>Clarity: I knew my "why" and lived intentionally today.</p>
+            <p>Claritate: Mi-am cunoscut "de ce-ul" și am trăit intenționat astăzi.</p>
             <div>
                 <!-- Radio buttons for rating -->
                 <input type="radio" id="clarity1" name="question1" value="1">
@@ -45,39 +70,48 @@
 
         <!-- Question 2 -->
         <div class="question">
-            <p>Energy: I managed my mental and physical energy well.</p>
+            <p>Energie: Mi-am gestionat bine energia mentală și fizică.</p>
             <div>
                 <!-- Radio buttons for rating -->
-                <!-- Repeat radio button structure as above, make sure to change the 'name' for each question -->
+                <!-- Replace with actual values -->
             </div>
         </div>
 
-        <!-- Add the rest of the questions in a similar pattern -->
-        <!-- ...
+        <!-- Question 3 -->
         <div class="question">
-            <p>Question Text</p>
+            <p>Influență: Am ghidat sau tratat bine pe alții astăzi.</p>
             <div>
-                Radio buttons for rating
+                <!-- Radio buttons for rating -->
+                <!-- Replace with actual values -->
             </div>
         </div>
-        ... -->
+
+        <!-- Add more questions as needed -->
+
     </div>
 
-    <button onclick="submitRatings()">Submit My Ratings</button>
-    
+    <button onclick="submitRatings()">Trimite Evaluările</button>
+
     <script>
         function submitRatings() {
-            for (let i = 1; i <= 10; i++) {
+            var totalRatings = 0;
+            var numQuestions = 3; // Change this to the total number of questions
+            for (let i = 1; i <= numQuestions; i++) {
                 var rating = getRatingForQuestion(i); 
-                localStorage.setItem('ratingQuestion' + i, rating);
-            }
-            alert("Thank you for submitting your ratings!");
-        }
-
-        function getRatingForQuestion(questionNumber) {
-            return document.querySelector(`input[name="question${questionNumber}"]:checked`).value;
-        }
-    </script>
-
+                if (rating == null) {
+                    alert('Vă rugăm să selectați o evaluare pentru toate întrebările.');
+return; // Stop the function if not all questions have been rated
+}
+totalRatings += parseInt(rating);
+localStorage.setItem('ratingQuestion' + i, rating);
+}
+var averageRating = totalRatings / numQuestions;
+alert("Mulțumesc pentru evaluare! Media dvs. este: " + averageRating.toFixed(2));
+}
+    function getRatingForQuestion(questionNumber) {
+        var selectedRating = document.querySelector(`input[name="question${questionNumber}"]:checked`);
+        return selectedRating ? selectedRating.value : null; // Return null if no rating is selected
+    }
+</script>
 </body>
 </html>
